@@ -6,5 +6,13 @@
   "author": "Alexander Smirnov <al.smirnov996@gmail.com>",
   "license": "MIT",
   "private": true,
-  "main": "index.js"
+  "source": "src/index.html",
+  "browserslist": "> 0.5%, last 2 versions, not dead",
+  "scripts": {
+    "start": "parcel",
+    "build": "parcel build"
+  },
+  "dependencies": {
+    "parcel": "^2.7.0"
+  }
 }
