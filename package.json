@@ -1,0 +1,10 @@
+{
+  "name": "flappy-pixi",
+  "version": "0.0.0",
+  "description": "The famous game written in pixi.js",
+  "repository": "git@github.com:aliexme/flappy-pixi.git",
+  "author": "Alexander Smirnov <al.smirnov996@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "main": "index.js"
+}
