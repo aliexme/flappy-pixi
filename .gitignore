@@ -10,3 +10,7 @@ dist
 
 # Parcel
 .parcel-cache
+
+# ESLint
+!.eslintrc.js
+.eslintcache

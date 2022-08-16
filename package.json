@@ -11,12 +11,18 @@
   "scripts": {
     "start": "parcel",
     "build": "parcel build",
-    "ts:check": "tsc --noEmit"
+    "ts:check": "tsc --noEmit",
+    "lint:check": "eslint --ext .js,.ts --ignore-path .gitignore --cache ./",
+    "lint:fix": "yarn lint:check --fix"
   },
   "dependencies": {
     "parcel": "^2.7.0"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.33.1",
+    "@typescript-eslint/parser": "^5.33.1",
+    "eslint": "^8.22.0",
+    "eslint-plugin-import": "^2.26.0",
     "typescript": "^4.7.4"
   }
 }
