@@ -10,9 +10,13 @@
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "scripts": {
     "start": "parcel",
-    "build": "parcel build"
+    "build": "parcel build",
+    "ts:check": "tsc --noEmit"
   },
   "dependencies": {
     "parcel": "^2.7.0"
+  },
+  "devDependencies": {
+    "typescript": "^4.7.4"
   }
 }
