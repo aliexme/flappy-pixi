@@ -1,7 +1,7 @@
 {
   "name": "flappy-pixi",
   "version": "0.0.0",
-  "description": "The famous game written in pixi.js",
+  "description": "Flappy Bird game written in pixi.js",
   "repository": "git@github.com:aliexme/flappy-pixi.git",
   "author": "Alexander Smirnov <al.smirnov996@gmail.com>",
   "license": "MIT",
@@ -9,8 +9,9 @@
   "source": "src/index.html",
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "scripts": {
-    "start": "parcel",
-    "build": "parcel build",
+    "start": "yarn build:clean && parcel",
+    "build": "yarn build:clean && parcel build",
+    "build:clean": "rm -rf ./dist",
     "ts:check": "tsc --noEmit",
     "lint:check": "eslint --ext .js,.ts --ignore-path .gitignore --cache ./",
     "lint:fix": "yarn lint:check --fix"

@@ -1,2 +1,3 @@
-# flappy-pixi
-The famous game written in pixi.js
+# Flappy Pixi
+
+Flappy Bird game written in pixi.js
