@@ -1,6 +1,6 @@
 import * as PIXI from 'pixi.js'
 
-import eggHead from './assets/eggHead.png'
+import birdMidFlap from './assets/sprites/bird-midflap.png'
 
 export class Game {
   #app: PIXI.Application
@@ -11,17 +11,7 @@ export class Game {
 
   start() {
     this.#app.ticker.start()
-
-    const sprite = PIXI.Sprite.from(eggHead)
-    sprite.anchor.set(0.5)
-    this.#app.stage.addChild(sprite)
-
-    sprite.x = this.#app.screen.width / 2
-    sprite.y = this.#app.screen.height / 2
-
-    this.#app.ticker.add((dt) => {
-      sprite.rotation -= 0.01 * dt
-    })
+    this.#loadAssets()
   }
 
   render(container: HTMLElement) {
@@ -30,6 +20,30 @@ export class Game {
 
     window.addEventListener('resize', () => {
       this.#fitRenderer(container)
+    })
+  }
+
+  #loadAssets() {
+    const loader = PIXI.Loader.shared
+    loader.add('birdMidFlap', birdMidFlap)
+
+    loader.onComplete.add(() => {
+      this.#onAssetsLoaded()
+    })
+
+    loader.load()
+  }
+
+  #onAssetsLoaded() {
+    const bird = PIXI.Sprite.from('birdMidFlap')
+    bird.anchor.set(0.5)
+    this.#app.stage.addChild(bird)
+
+    bird.x = this.#app.screen.width / 2
+    bird.y = this.#app.screen.height / 2
+
+    this.#app.ticker.add((dt) => {
+      bird.rotation -= 0.01 * dt
     })
   }
 
