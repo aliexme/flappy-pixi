@@ -1,6 +1,9 @@
 import * as PIXI from 'pixi.js'
 
+import { Bird } from './entities/Bird'
+import birdDownFlap from './assets/sprites/bird-downflap.png'
 import birdMidFlap from './assets/sprites/bird-midflap.png'
+import birdUpFlap from './assets/sprites/bird-upflap.png'
 
 export class Game {
   #app: PIXI.Application
@@ -25,7 +28,9 @@ export class Game {
 
   #loadAssets() {
     const loader = PIXI.Loader.shared
+    loader.add('birdDownFlap', birdDownFlap)
     loader.add('birdMidFlap', birdMidFlap)
+    loader.add('birdUpFlap', birdUpFlap)
 
     loader.onComplete.add(() => {
       this.#onAssetsLoaded()
@@ -35,7 +40,7 @@ export class Game {
   }
 
   #onAssetsLoaded() {
-    const bird = PIXI.Sprite.from('birdMidFlap')
+    const bird = new Bird()
     bird.anchor.set(0.5)
     this.#app.stage.addChild(bird)
 
