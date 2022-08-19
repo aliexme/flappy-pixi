@@ -8,7 +8,7 @@ export class Bird extends PIXI.AnimatedSprite {
       PIXI.Texture.from('birdUpFlap'),
     ])
 
+    this.anchor.set(0.5)
     this.animationSpeed = 0.1
-    this.play()
   }
 }

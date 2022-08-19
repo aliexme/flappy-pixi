@@ -1,12 +1,14 @@
 import * as PIXI from 'pixi.js'
 
-import { Bird } from './entities/Bird'
-import birdDownFlap from './assets/sprites/bird-downflap.png'
-import birdMidFlap from './assets/sprites/bird-midflap.png'
-import birdUpFlap from './assets/sprites/bird-upflap.png'
+import { GameSettings } from './GameSettings'
+import { GameController } from './GameController'
+import birdDownFlap from '../assets/sprites/bird-downflap.png'
+import birdMidFlap from '../assets/sprites/bird-midflap.png'
+import birdUpFlap from '../assets/sprites/bird-upflap.png'
 
 export class Game {
   #app: PIXI.Application
+  #gameController: GameController | undefined
 
   constructor() {
     this.#app = new PIXI.Application({ autoStart: false })
@@ -40,20 +42,14 @@ export class Game {
   }
 
   #onAssetsLoaded() {
-    const bird = new Bird()
-    bird.anchor.set(0.5)
-    this.#app.stage.addChild(bird)
-
-    bird.x = this.#app.screen.width / 2
-    bird.y = this.#app.screen.height / 2
-
-    this.#app.ticker.add((dt) => {
-      bird.rotation -= 0.01 * dt
-    })
+    this.#gameController = new GameController(this.#app.stage)
+    this.#gameController.init()
   }
 
   #fitRenderer(container: HTMLElement) {
     const containerSizes = container.getBoundingClientRect()
     this.#app.renderer.resize(containerSizes.width, containerSizes.height)
+    GameSettings.resize(this.#app.renderer.width, this.#app.renderer.height)
+    this.#gameController?.reset()
   }
 }
