@@ -2,17 +2,21 @@ import * as PIXI from 'pixi.js'
 
 import { GameSettings } from './GameSettings'
 import { GameController } from './GameController'
+import backgroundDay from '../assets/sprites/background-day.png'
+import ground from '../assets/sprites/ground.png'
 import birdDownFlap from '../assets/sprites/bird-downflap.png'
 import birdMidFlap from '../assets/sprites/bird-midflap.png'
 import birdUpFlap from '../assets/sprites/bird-upflap.png'
-import ground from '../assets/sprites/ground.png'
 
 export class Game {
   #app: PIXI.Application
   #gameController: GameController | undefined
 
   constructor() {
-    this.#app = new PIXI.Application({ autoStart: false })
+    this.#app = new PIXI.Application({
+      autoStart: false,
+      backgroundColor: 0x4dc1cb,
+    })
   }
 
   start() {
@@ -31,10 +35,11 @@ export class Game {
 
   #loadAssets() {
     const loader = PIXI.Loader.shared
+    loader.add('backgroundDay', backgroundDay)
+    loader.add('ground', ground)
     loader.add('birdDownFlap', birdDownFlap)
     loader.add('birdMidFlap', birdMidFlap)
     loader.add('birdUpFlap', birdUpFlap)
-    loader.add('ground', ground)
 
     loader.onComplete.add(() => {
       this.#onAssetsLoaded()

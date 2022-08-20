@@ -14,11 +14,11 @@ export class BirdController {
     this.#movingTicker = new PIXI.Ticker()
 
     this.#movingTicker.add((dt) => {
-      this.#bird.rotation += 0.03 * dt
+      this.#moveBird(dt)
     })
 
     this.#view.addChild(this.#bird)
-    this.resetPosition()
+    this.resetBird()
   }
 
   startFlapping() {
@@ -38,11 +38,16 @@ export class BirdController {
   }
 
   flyUp() {
-    this.#bird.y += 10
+    this.#bird.y -= 10
   }
 
-  resetPosition() {
+  resetBird() {
     this.#bird.x = GameSettings.width / 3
     this.#bird.y = GameSettings.height / 2.75
+    this.#bird.rotation = 0
+  }
+
+  #moveBird(dt: number) {
+    this.#bird.rotation += 0.03 * dt
   }
 }
