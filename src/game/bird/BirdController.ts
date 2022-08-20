@@ -21,26 +21,16 @@ export class BirdController {
     this.resetPosition()
   }
 
-  start() {
-    this.startFlapping()
-    this.startMoving()
-  }
-
-  stop() {
-    this.stopFlapping()
-    this.stopMoving()
-  }
-
   startFlapping() {
     this.#bird.play()
   }
 
-  startMoving() {
-    this.#movingTicker.start()
-  }
-
   stopFlapping() {
     this.#bird.stop()
+  }
+
+  startMoving() {
+    this.#movingTicker.start()
   }
 
   stopMoving() {
@@ -52,7 +42,7 @@ export class BirdController {
   }
 
   resetPosition() {
-    this.#bird.x = GameSettings.width / 2
-    this.#bird.y = GameSettings.height / 2
+    this.#bird.x = GameSettings.width / 3
+    this.#bird.y = GameSettings.height / 2.75
   }
 }

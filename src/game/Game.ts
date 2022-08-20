@@ -5,6 +5,7 @@ import { GameController } from './GameController'
 import birdDownFlap from '../assets/sprites/bird-downflap.png'
 import birdMidFlap from '../assets/sprites/bird-midflap.png'
 import birdUpFlap from '../assets/sprites/bird-upflap.png'
+import ground from '../assets/sprites/ground.png'
 
 export class Game {
   #app: PIXI.Application
@@ -33,6 +34,7 @@ export class Game {
     loader.add('birdDownFlap', birdDownFlap)
     loader.add('birdMidFlap', birdMidFlap)
     loader.add('birdUpFlap', birdUpFlap)
+    loader.add('ground', ground)
 
     loader.onComplete.add(() => {
       this.#onAssetsLoaded()
