@@ -6,19 +6,23 @@ import { Bird } from './Bird'
 export class BirdController {
   #view: PIXI.Container
   #bird: Bird
-  #movingTicker: PIXI.Ticker
+  #gravityTicker: PIXI.Ticker
 
   constructor(view: PIXI.Container) {
     this.#view = view
     this.#bird = new Bird()
-    this.#movingTicker = new PIXI.Ticker()
+    this.#gravityTicker = new PIXI.Ticker()
 
-    this.#movingTicker.add((dt) => {
+    this.#gravityTicker.add((dt) => {
       this.#moveBird(dt)
     })
 
     this.#view.addChild(this.#bird)
     this.resetBird()
+  }
+
+  get bird() {
+    return this.#bird
   }
 
   startFlapping() {
@@ -30,24 +34,27 @@ export class BirdController {
   }
 
   startMoving() {
-    this.#movingTicker.start()
+    this.#gravityTicker.start()
   }
 
   stopMoving() {
-    this.#movingTicker.stop()
+    this.#gravityTicker.stop()
   }
 
   flyUp() {
-    this.#bird.y -= 10
+    this.#bird.velocityY = -GameSettings.birdFlyUpVelocityY
   }
 
   resetBird() {
     this.#bird.x = GameSettings.width / 3
     this.#bird.y = GameSettings.height / 2.75
     this.#bird.rotation = 0
+    this.#bird.velocityY = 0
   }
 
   #moveBird(dt: number) {
-    this.#bird.rotation += 0.03 * dt
+    this.#bird.y = this.#bird.y + this.#bird.velocityY * dt + GameSettings.gravityPower * dt^2 / 2
+    this.#bird.y = Math.min(Math.max(this.#bird.y, 0), GameSettings.height)
+    this.#bird.velocityY = this.#bird.velocityY + GameSettings.gravityPower * dt
   }
 }

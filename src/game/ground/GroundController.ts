@@ -21,6 +21,10 @@ export class GroundController {
     this.resetGround()
   }
 
+  get ground() {
+    return this.#ground
+  }
+
   startMoving() {
     this.#movingTicker.start()
   }
