@@ -7,6 +7,10 @@ import ground from '../assets/sprites/ground.png'
 import birdDownFlap from '../assets/sprites/bird-downflap.png'
 import birdMidFlap from '../assets/sprites/bird-midflap.png'
 import birdUpFlap from '../assets/sprites/bird-upflap.png'
+import wing from '../assets/audio/wing.wav'
+import point from '../assets/audio/point.wav'
+import hit from '../assets/audio/hit.wav'
+import die from '../assets/audio/die.wav'
 
 export class Game {
   #app: PIXI.Application
@@ -35,11 +39,19 @@ export class Game {
 
   #loadAssets() {
     const loader = PIXI.Loader.shared
+
+    // sprites
     loader.add('backgroundDay', backgroundDay)
     loader.add('ground', ground)
     loader.add('birdDownFlap', birdDownFlap)
     loader.add('birdMidFlap', birdMidFlap)
     loader.add('birdUpFlap', birdUpFlap)
+
+    // audio
+    loader.add('wing', wing)
+    loader.add('point', point)
+    loader.add('hit', hit)
+    loader.add('die', die)
 
     loader.onComplete.add(() => {
       this.#onAssetsLoaded()

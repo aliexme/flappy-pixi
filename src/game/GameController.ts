@@ -1,4 +1,5 @@
 import * as PIXI from 'pixi.js'
+import { sound } from '@pixi/sound'
 
 import { GameModel } from './GameModel'
 import { GameSettings } from './GameSettings'
@@ -129,6 +130,8 @@ export class GameController {
   }
 
   #onCollision = () => {
+    sound.play('hit')
+    sound.play('die')
     this.setGameOver()
   }
 }

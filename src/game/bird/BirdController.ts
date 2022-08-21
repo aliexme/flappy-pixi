@@ -1,4 +1,5 @@
 import * as PIXI from 'pixi.js'
+import { sound } from '@pixi/sound'
 
 import { GameSettings } from '../GameSettings'
 import { Bird } from './Bird'
@@ -43,6 +44,7 @@ export class BirdController {
 
   flyUp() {
     this.#bird.velocityY = -GameSettings.birdFlyUpVelocityY
+    sound.play('wing')
   }
 
   resetBird() {

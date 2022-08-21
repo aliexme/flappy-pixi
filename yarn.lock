@@ -234,7 +234,7 @@
   dependencies:
     "@parcel/plugin" "2.7.0"
 
-"@parcel/config-default@2.7.0":
+"@parcel/config-default@2.7.0", "@parcel/config-default@^2.7.0":
   version "2.7.0"
   resolved "https://registry.yarnpkg.com/@parcel/config-default/-/config-default-2.7.0.tgz#2f6cec9c185b89e40f343549295cad21295621a8"
   integrity sha512-ZzsLr97AYrz8c9k6qn3DlqPzifi3vbP7q3ynUrAFxmt0L4+K0H9N508ZkORYmCgaFjLIQ8Y3eWpwCJ0AewPNIg==
@@ -738,7 +738,7 @@
     posthtml-render "^3.0.0"
     semver "^5.7.1"
 
-"@parcel/transformer-raw@2.7.0":
+"@parcel/transformer-raw@2.7.0", "@parcel/transformer-raw@^2.7.0":
   version "2.7.0"
   resolved "https://registry.yarnpkg.com/@parcel/transformer-raw/-/transformer-raw-2.7.0.tgz#d6d8b94d1b33efc3dbf748ec1954c8917a2e1566"
   integrity sha512-sDnItWCFSDez0izK1i5cgv+kXzZTbcJh4rNpVIgmE1kBLvAz608sqgcCkavb2wVJIvLesxYM+5G4p1CwkDlZ1g==
@@ -958,6 +958,11 @@
   version "6.5.1"
   resolved "https://registry.yarnpkg.com/@pixi/settings/-/settings-6.5.1.tgz#8603003b39cfbed3ebdb08dea56a39b52c5070e0"
   integrity sha512-pIjxcko8gWWizU5LnbkkFpQLsYs4P9v82H1GPWQ2FCJp/6UzKwd2Scob3ufnDti0WBzB8tUFLIratbOJDQg8KA==
+
+"@pixi/sound@^4.3.0":
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/@pixi/sound/-/sound-4.3.0.tgz#34ba6b286d9d99267cb74e92b569ac0871fa2299"
+  integrity sha512-90zvUZwr+Ooe8Y1CdebXBdr51jPdFMHDnuJa7BVSsT3xqyjgMozkLJSMfU0PcZJIbuFIcgPmyptIeG486nywog==
 
 "@pixi/sprite-animated@6.5.1":
   version "6.5.1"
