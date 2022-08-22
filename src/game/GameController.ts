@@ -98,18 +98,14 @@ export class GameController {
   }
 
   restart() {
-    this.#model.run()
-    this.#collisionChecker.start()
+    this.#model.reset()
     this.#backgroundController.resetBackground()
     this.#backgroundController.startMoving()
     this.#pipesController.resetPipes()
-    this.#pipesController.startMoving()
     this.#groundController.resetGround()
     this.#groundController.startMoving()
     this.#birdController.resetBird()
     this.#birdController.startFlapping()
-    this.#birdController.startMoving()
-    this.#birdController.flyUp()
   }
 
   reset() {

@@ -3,6 +3,7 @@ import { sound } from '@pixi/sound'
 
 import { GameSettings } from '../GameSettings'
 import { Bird } from './Bird'
+import { clamp } from '../../utils/numbers'
 
 export class BirdController {
   #view: PIXI.Container
@@ -55,8 +56,9 @@ export class BirdController {
   }
 
   #moveBird(dt: number) {
-    this.#bird.y = this.#bird.y + this.#bird.velocityY * dt + GameSettings.gravityPower * dt^2 / 2
-    this.#bird.y = Math.min(Math.max(this.#bird.y, 0), GameSettings.height)
-    this.#bird.velocityY = this.#bird.velocityY + GameSettings.gravityPower * dt
+    const updatedY = this.#bird.y + this.#bird.velocityY * dt + GameSettings.gravityPower * dt^2 / 2
+    const updatedVelocityY = this.#bird.velocityY + GameSettings.gravityPower * dt
+    this.#bird.y = clamp(updatedY, 0, GameSettings.height)
+    this.#bird.velocityY = updatedVelocityY
   }
 }

@@ -47,7 +47,7 @@ export class PipesController {
   }
 
   #initPipes() {
-    const pipesCount = Math.ceil(GameSettings.width / Pipe.width) + 2
+    const pipesCount = Math.ceil(GameSettings.width / (Pipe.width + GameSettings.pipesDistance)) + 2
 
     for (let i = 0; i < pipesCount; i++) {
       const prevPipesPair = i > 0 ? this.#pipePairs[i - 1] : undefined
@@ -81,7 +81,7 @@ export class PipesController {
     }
 
     const nextPipeDistance = this.#getNextPipeDistance()
-    const dyMax = nextPipeDistance / 4 + 2
+    const dyMax = nextPipeDistance / 3 + 2
     const nextMinY = Math.max(pipesPair.y - dyMax, Pipe.height / 3)
     const nextMaxY = Math.min(pipesPair.y + dyMax, GameSettings.height - Ground.height - Pipe.height / 3)
 
@@ -90,6 +90,6 @@ export class PipesController {
   }
 
   #getNextPipeDistance(): number {
-    return getRandomFloat({ from: GameSettings.pipesDistanceMin, to: GameSettings.pipesDistanceMax })
+    return GameSettings.pipesDistance
   }
 }
