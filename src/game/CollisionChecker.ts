@@ -56,11 +56,11 @@ export class CollisionChecker {
   #hasCollisionWithPipes(): boolean {
     const pipePairs = this.#pipesController.pipePairs
     const bird = this.#birdController.bird
-    const birdLeftX = bird.x - bird.width / 2
-    const birdRightX = bird.x + bird.width / 2
-    const birdTopY = bird.y - bird.height / 2
-    const birdBottomY = bird.y + bird.height / 2
     const birdR = bird.height / 2
+    const birdLeftX = bird.x - birdR
+    const birdRightX = bird.x + birdR
+    const birdTopY = bird.y - birdR
+    const birdBottomY = bird.y + birdR
 
     return pipePairs.some((pipesPair) => {
       if (birdRightX < pipesPair.x) return false

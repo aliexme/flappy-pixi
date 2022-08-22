@@ -82,15 +82,19 @@ export class PipesController {
   }
 
   #calcNextPipesPairPosition(pipesPair: PipesPair, prevPipesPair: PipesPair | undefined) {
+    const topMinY = 150
+    const bottomMaxY = GameSettings.height - Ground.height - 150
+
     if (!prevPipesPair) {
       pipesPair.x = GameSettings.width + 200
+      pipesPair.y = getRandomFloat({ from: topMinY, to: bottomMaxY })
       return
     }
 
     const nextPipeDistance = this.#getNextPipeDistance()
-    const dyMax = nextPipeDistance / 3 + 2
-    const nextMinY = Math.max(pipesPair.y - dyMax, Pipe.height / 3)
-    const nextMaxY = Math.min(pipesPair.y + dyMax, GameSettings.height - Ground.height - Pipe.height / 3)
+    const dyMax = nextPipeDistance / 1.5 + 2
+    const nextMinY = Math.max(pipesPair.y - dyMax, topMinY)
+    const nextMaxY = Math.min(pipesPair.y + dyMax, bottomMaxY)
 
     pipesPair.x = prevPipesPair.x + Pipe.width + nextPipeDistance
     pipesPair.y = getRandomFloat({ from: nextMinY, to: nextMaxY })
