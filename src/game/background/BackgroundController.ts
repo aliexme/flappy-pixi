@@ -32,7 +32,6 @@ export class BackgroundController {
 
   resetBackground() {
     this.#background.width = GameSettings.width
-    this.#background.height = GameSettings.height - Ground.height
     this.#background.x = 0
     this.#background.y = GameSettings.height - Background.height - Ground.height
   }

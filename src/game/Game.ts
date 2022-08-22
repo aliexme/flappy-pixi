@@ -3,6 +3,7 @@ import * as PIXI from 'pixi.js'
 import { GameSettings } from './GameSettings'
 import { GameController } from './GameController'
 import backgroundDay from '../assets/sprites/background-day.png'
+import pipe from '../assets/sprites/pipe.png'
 import ground from '../assets/sprites/ground.png'
 import birdDownFlap from '../assets/sprites/bird-downflap.png'
 import birdMidFlap from '../assets/sprites/bird-midflap.png'
@@ -42,6 +43,7 @@ export class Game {
 
     // sprites
     loader.add('backgroundDay', backgroundDay)
+    loader.add('pipe', pipe)
     loader.add('ground', ground)
     loader.add('birdDownFlap', birdDownFlap)
     loader.add('birdMidFlap', birdMidFlap)
