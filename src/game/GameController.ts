@@ -6,8 +6,10 @@ import { GameSettings } from './GameSettings'
 import { CollisionChecker } from './CollisionChecker'
 import { BackgroundController } from './background/BackgroundController'
 import { GroundController } from './ground/GroundController'
+import { Pipe } from './pipes/Pipe'
 import { PipesController } from './pipes/PipesController'
 import { BirdController } from './bird/BirdController'
+import { GameScoreTextController } from './gameScoreText/GameScoreTextController'
 
 export class GameController {
   #model: GameModel
@@ -19,6 +21,7 @@ export class GameController {
   #pipesController: PipesController
   #groundController: GroundController
   #birdController: BirdController
+  #gameScoreTextController: GameScoreTextController
 
   constructor(view: PIXI.Container) {
     this.#model = new GameModel()
@@ -31,9 +34,10 @@ export class GameController {
     this.#view.addChild(this.#emptySprite)
 
     this.#backgroundController = new BackgroundController(this.#view)
-    this.#pipesController = new PipesController(this.#view)
+    this.#pipesController = new PipesController(this.#view, this.#onPipeMoved)
     this.#groundController = new GroundController(this.#view)
     this.#birdController = new BirdController(this.#view)
+    this.#gameScoreTextController = new GameScoreTextController(this.#model, this.#view)
 
     this.#collisionChecker = new CollisionChecker(
       this.#pipesController,
@@ -99,6 +103,7 @@ export class GameController {
 
   restart() {
     this.#model.reset()
+    this.#gameScoreTextController.updateScoreText()
     this.#backgroundController.resetBackground()
     this.#backgroundController.startMoving()
     this.#pipesController.resetPipes()
@@ -110,6 +115,7 @@ export class GameController {
 
   reset() {
     this.#model.reset()
+    this.#gameScoreTextController.updateScoreText()
     this.#collisionChecker.stop()
     this.#emptySprite.width = GameSettings.width
     this.#emptySprite.height = GameSettings.height
@@ -123,6 +129,7 @@ export class GameController {
     this.#birdController.resetBird()
     this.#birdController.startFlapping()
     this.#birdController.stopMoving()
+    this.#gameScoreTextController.resetScoreText()
   }
 
   #mainAction() {
@@ -135,6 +142,22 @@ export class GameController {
     } else {
       this.start()
     }
+  }
+
+  #onPipeMoved = (pipePrevX: number, pipeNextX: number) => {
+    const bird = this.#birdController.bird
+    const birdLeftX = bird.x - bird.width / 2
+    const pipePrevRightX = pipePrevX + Pipe.width
+    const pipeNextRightX = pipeNextX + Pipe.width
+    if (birdLeftX <= pipePrevRightX && birdLeftX > pipeNextRightX) {
+      this.#onPipePassed()
+    }
+  }
+
+  #onPipePassed = () => {
+    this.#model.incrementScore()
+    this.#gameScoreTextController.updateScoreText()
+    sound.play('point')
   }
 
   #onCollision = () => {

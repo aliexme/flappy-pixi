@@ -48,6 +48,7 @@ export class GameModel {
     this.#running = false
     this.#paused = false
     this.#gameOver = false
+    this.#score = 0
   }
 
   incrementScore() {

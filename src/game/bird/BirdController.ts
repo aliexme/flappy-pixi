@@ -56,9 +56,9 @@ export class BirdController {
   }
 
   #moveBird(dt: number) {
-    const updatedY = this.#bird.y + this.#bird.velocityY * dt + GameSettings.gravityPower * dt^2 / 2
-    const updatedVelocityY = this.#bird.velocityY + GameSettings.gravityPower * dt
-    this.#bird.y = clamp(updatedY, 0, GameSettings.height)
-    this.#bird.velocityY = updatedVelocityY
+    const nextY = this.#bird.y + this.#bird.velocityY * dt + GameSettings.gravityPower * dt^2 / 2
+    const nextVelocityY = this.#bird.velocityY + GameSettings.gravityPower * dt
+    this.#bird.y = clamp(nextY, 0, GameSettings.height)
+    this.#bird.velocityY = nextVelocityY
   }
 }

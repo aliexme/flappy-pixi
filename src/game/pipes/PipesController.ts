@@ -6,15 +6,19 @@ import { Pipe } from './Pipe'
 import { PipesPair } from './PipesPair'
 import { getRandomFloat } from '../../utils/random'
 
+type OnPipeMovedHandler = (prevX: number, nextX: number) => void
+
 export class PipesController {
   #view: PIXI.Container
   #pipePairs: PipesPair[]
   #movingTicker: PIXI.Ticker
+  #onPipeMoved: OnPipeMovedHandler
 
-  constructor(view: PIXI.Container) {
+  constructor(view: PIXI.Container, onPipeMoved: OnPipeMovedHandler) {
     this.#view = view
     this.#pipePairs = []
     this.#movingTicker = new PIXI.Ticker()
+    this.#onPipeMoved = onPipeMoved
 
     this.#movingTicker.add(() => {
       this.#movePipes()
@@ -64,7 +68,10 @@ export class PipesController {
     const lastPipesPair = this.#pipePairs[this.#pipePairs.length - 1]
 
     this.#pipePairs.forEach((pipesPair) => {
-      pipesPair.x -= GameSettings.pipesMovingSpeed
+      const prevX = pipesPair.x
+      const nextX = pipesPair.x - GameSettings.pipesMovingSpeed
+      pipesPair.x = nextX
+      this.#onPipeMoved(prevX, nextX)
     })
 
     if (firstPipesPair.x + Pipe.width < 0) {
