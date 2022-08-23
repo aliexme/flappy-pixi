@@ -42,5 +42,7 @@ export class GroundController {
 
   #moveGround() {
     this.#ground.tilePosition.x -= GameSettings.groundMovingSpeed
+    this.#ground.tilePosition.x %= this.#ground.texture.width
+    this.#ground.tilePosition.y %= this.#ground.texture.height
   }
 }

@@ -38,5 +38,7 @@ export class BackgroundController {
 
   #moveBackground() {
     this.#background.tilePosition.x -= GameSettings.backgroundMovingSpeed
+    this.#background.tilePosition.x %= this.#background.texture.width
+    this.#background.tilePosition.y %= this.#background.texture.height
   }
 }
