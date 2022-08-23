@@ -8,14 +8,14 @@ import { clamp } from '../../utils/numbers'
 export class BirdController {
   #view: PIXI.Container
   #bird: Bird
-  #gravityTicker: PIXI.Ticker
+  #movingTicker: PIXI.Ticker
 
   constructor(view: PIXI.Container) {
     this.#view = view
     this.#bird = new Bird()
-    this.#gravityTicker = new PIXI.Ticker()
+    this.#movingTicker = new PIXI.Ticker()
 
-    this.#gravityTicker.add((dt) => {
+    this.#movingTicker.add((dt) => {
       this.#moveBird(dt)
     })
 
@@ -36,11 +36,11 @@ export class BirdController {
   }
 
   startMoving() {
-    this.#gravityTicker.start()
+    this.#movingTicker.start()
   }
 
   stopMoving() {
-    this.#gravityTicker.stop()
+    this.#movingTicker.stop()
   }
 
   flyUp() {
@@ -58,7 +58,11 @@ export class BirdController {
   #moveBird(dt: number) {
     const nextY = this.#bird.y + this.#bird.velocityY * dt + GameSettings.gravityPower * dt^2 / 2
     const nextVelocityY = this.#bird.velocityY + GameSettings.gravityPower * dt
+    const dRotation = nextVelocityY > GameSettings.birdFlyUpVelocityY / 1.25 ? nextVelocityY / 80 : -0.125
+    const nextRotation = this.#bird.rotation + dRotation
+
     this.#bird.y = clamp(nextY, 0, GameSettings.height)
     this.#bird.velocityY = nextVelocityY
+    this.#bird.rotation = clamp(nextRotation, -0.3, 0.7)
   }
 }
