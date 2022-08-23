@@ -92,9 +92,10 @@ export class PipesController {
     }
 
     const nextPipeDistance = this.#getNextPipeDistance()
-    const dyMax = nextPipeDistance / 1.5 + 2
-    const nextMinY = Math.max(pipesPair.y - dyMax, topMinY)
-    const nextMaxY = Math.min(pipesPair.y + dyMax, bottomMaxY)
+    const dyTopMax = nextPipeDistance / 2 + 2
+    const dyBottomMax = nextPipeDistance / 1.5 + 2
+    const nextMinY = Math.max(pipesPair.y - dyTopMax, topMinY)
+    const nextMaxY = Math.min(pipesPair.y + dyBottomMax, bottomMaxY)
 
     pipesPair.x = prevPipesPair.x + Pipe.width + nextPipeDistance
     pipesPair.y = getRandomFloat({ from: nextMinY, to: nextMaxY })
